@@ -1,0 +1,21 @@
+.myNav img {
+    width: 10%;
+}
+
+.myNav {
+    grid-area: m;
+    background-color: green;
+    padding: 30px;
+
+}
+/*.myNav a{*/
+/*    color: aliceblue;*/
+/*}*/
+
+.item{
+    color: aliceblue;
+}
+.item .active{
+    color: darkred;
+
+}

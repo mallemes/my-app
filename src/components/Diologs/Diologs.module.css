@@ -1,0 +1,22 @@
+.main{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    background-color: darkcyan;
+    padding: 20px;
+}
+.dialogs{
+
+}
+
+.dialogs .dialog{
+    font-weight: 700;
+    font-size: 20px;
+    font-style: oblique;
+}
+.messages{
+
+}
+.messages .message{
+    font-style: italic;
+
+}

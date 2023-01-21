@@ -1,0 +1,28 @@
+
+
+.avatar{
+    width: 25%;
+}
+.main{
+    background-color: #ff936a;
+    border-color: black;
+    padding: 20px;
+    display: flex;
+
+}
+button{
+    width: 60px;
+    align-items: center;
+    justify-items: center;
+    border-color: black;
+    border-radius: 10px;
+    background-color: cyan;
+}
+.location{
+   color: darkcyan;
+    margin-block-end: 500px;
+}
+.selectedPg{
+    color: #dc6fff;
+    font-size: xx-large;
+}
