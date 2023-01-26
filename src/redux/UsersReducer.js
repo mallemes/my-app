@@ -18,6 +18,7 @@ const UsersReducer = (state = defValue, action) => {  //action ={type:"...", ...
         //     ...state,
         // users: state.users.map((el)=>el.id===action.userId ? el.followed=true :el.followed),
         // }
+        //use
         return {
             ...state,
             users: state.users.map((user) => {
