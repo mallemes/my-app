@@ -1,25 +1,18 @@
 import React from "react";
 import User from "./User";
-import axios from "axios";
+import styles from "./Users.module.css";
+import loading from "../../assets/images/loading.gif";
 const Users = (props) => {
-    const getUsers = () => {
-        if(props.users.length === 0){
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(responce => {( props.setUsers(responce.data.items))})
-                .catch(error =>(console.error(error)))
-
-        }
-    }
-    const followUser = (userId) => props.myFollow(userId)
-    const unFollowUser = (userId) => props.unFollow(userId)
-    const users = props.users.map((user) => <User
-        key={user.id} user={user} followUser={followUser} unFollowUser={unFollowUser}/>
-
-
+    // debugger
+    const users = props.users.map((user) =><User
+        key={user.id} user={user} followUser={props.followUser} unFollowUser={props.unFollowUser}/>
     )
     return (
-        <div >
-            <button onClick={getUsers}>getUsers</button>
+        <div>
+            <div>
+                {props.pages.map(e=> <button key={e} className={props.currentPage === e ? styles.selectedPg:""} onClick={()=>props.onChangePage(e)}>{e}</button>)}
+            </div>
+            {props.loadingValue ? <div><img src={loading} alt="..." style={{height:"200px"}}/></div> :null}
             {users}
         </div>
     );
