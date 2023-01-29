@@ -10,7 +10,7 @@ function MyContent(props) {
     const changeValue =(e)=>{
         props.changeValue(e.target.value)
     }
-debugger
+// debugger
     return (
         <div /*className={style.myContent}*/>
             <div className={style.mainTitle}>

@@ -4,7 +4,7 @@ import styles from "./Users.module.css";
 import loading from "../../assets/images/loading.gif";
 const Users = (props) => {
     // debugger
-    const users = props.users.map((user) =><User
+    let users = props.users.map((user) =><User
         key={user.id} user={user} followUser={props.followUser} unFollowUser={props.unFollowUser}/>
     )
     return (

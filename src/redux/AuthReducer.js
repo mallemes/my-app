@@ -1,4 +1,4 @@
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "SET_USER_DAT";
 
 const defSate = {
         userId: null,

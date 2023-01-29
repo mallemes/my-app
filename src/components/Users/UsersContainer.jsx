@@ -7,7 +7,8 @@ import Users from "./Users";
 class UsersCl extends React.Component {
     componentDidMount() {
         this.props.setLoadVal(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.totalCount}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.totalCount}`,
+            {withCredentials:true})
             .then(response => {
                 this.props.setUsers(response.data.items);
                 this.props.setLoadVal(false);
@@ -16,7 +17,8 @@ class UsersCl extends React.Component {
     onChangePage =(pageId)=>{
         this.props.setCurPage(pageId)
         this.props.setLoadVal(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageId}&count=${this.props.totalCount}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageId}&count=${this.props.totalCount}`,
+            {withCredentials:true})
             .then(response => {
                 this.props.setUsers(response.data.items);
                 this.props.setLoadVal(false);})

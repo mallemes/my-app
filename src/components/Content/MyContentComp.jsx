@@ -11,9 +11,9 @@ class MyContentComp1 extends React.Component{
         if (!a) {
             a = 2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${a}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${a}`,{withCredentials:true})
             .then(response => {
-                this.props.userDataAC(response.data);
+                this.props.userData(response.data);
             });
 
     }
@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch)=>
             const a = {type: "ADD-POST"}
             return dispatch(a);
         },
-        userDataAC: (data)=>{
+        userData: (data)=>{
             userDataAC(data);
             return dispatch(userDataAC(data));
         }
