@@ -3,7 +3,7 @@ import Posts from "../Post/Posts";
 import React from "react";
 
 function MyContent(props) {
-debugger;
+
     const addPot = () => {
         props.addPot();
     }
@@ -21,7 +21,13 @@ debugger;
                     src="https://www.ucdavis.edu/sites/default/files/styles/ucd_panoramic_image/public/media/images/beaches-near-uc-davis.jpg?h=8e58fdb5&itok=0D79HHcC"
                     alt=""/>
             </div>
-
+                <div><center>profile</center></div>
+            {props.user?
+                <div>
+                    {props.user.aboutMe}
+                    <div><img src={props.user.photos.small} alt="..."/></div>
+                </div>:""}
+            <br/><br/><br/>
             <div>
                 <div><label htmlFor="">Create post:</label></div>
                 <div>

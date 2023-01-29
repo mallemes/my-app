@@ -1,4 +1,3 @@
-
 const defValue = {
     messagesDate: [
         {id: 1, message: "erjadennefenfdcn"},
@@ -15,6 +14,7 @@ const defValue = {
         {id: 5, name: "serik"},
     ],
     newMessageBody: '',
+    user: null,
 }
 
 const profileReducer = (state = defValue, action) => {
@@ -35,6 +35,7 @@ const profileReducer = (state = defValue, action) => {
         };
 
     }
+
     return state;
 }
 export default profileReducer;

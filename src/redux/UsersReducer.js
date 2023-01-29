@@ -5,7 +5,7 @@ const SET_CUR_PAGE = 'SET_CUR_PAGE';
 const SET_LOAD_VALUE = 'SET_LOAD_VALUE';
 const defValue = {
     users: [],
-    pageSize: 3,
+    pageSize: 10,
     totalCount: 10,
     currentPage:1,
     loading: false,

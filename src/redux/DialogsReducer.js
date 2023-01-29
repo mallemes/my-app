@@ -1,3 +1,4 @@
+const SET_USER_DATA = "SET_USER_DATA";
 
 const defSate = {  posts: [
         {id: 1, text: "offd vfnvn vkvvp"},
@@ -7,7 +8,9 @@ const defSate = {  posts: [
         {id: 5, text: "offd vfnvnr43efgrcvegr  reeegr vkvvp"},
         {id: 6, text: "offbgbbrgfddfd vfnvn vkvvp"},
     ],
-    newText: '',}
+    newText: '',
+    user:null,
+}
 const dialogsReducer = (state = defSate, action) => {
     if (action.type === "ADD-POST") {
         const obj = {id: 11, text: state.newText}
@@ -21,7 +24,15 @@ const dialogsReducer = (state = defSate, action) => {
        const copyState2 = {...state};
         copyState2.newText = action.newText;
         return copyState2;
+    }else if (action.type === SET_USER_DATA){
+        return {
+            ...state,
+            user: action.data,
+
+
+        }
     }
     return state
 }
+export const userDataAC = (data)=>({type:SET_USER_DATA,data})
 export default dialogsReducer;

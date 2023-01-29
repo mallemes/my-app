@@ -24,11 +24,13 @@ class UsersCl extends React.Component {
     }
 
     render() {
-        let pagesCount = Math.ceil(this.props.totalCount/this.props.pageSize);
-        const pages = [];
-        for (let i=1;i<pagesCount+1;i++){
-            pages.push(i)
-        }
+        // let pagesCount = Math.ceil(this.props.totalCount/this.props.pageSize);
+        // const pages = [];
+        // for (let i=1;i<pagesCount+1;i++){
+        //     pages.push(i)
+        // }
+        const pages = [1,2,3,4,5,6,7,8,9];
+
         const followUser = (userId) => this.props.myFollow(userId)
         const unFollowUser = (userId) => this.props.unFollow(userId)
         return (<Users pages={pages} users={this.props.users}
