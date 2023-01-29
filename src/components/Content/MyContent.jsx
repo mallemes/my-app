@@ -10,7 +10,7 @@ function MyContent(props) {
     const changeValue =(e)=>{
         props.changeValue(e.target.value)
     }
-
+debugger
     return (
         <div /*className={style.myContent}*/>
             <div className={style.mainTitle}>
@@ -24,8 +24,8 @@ function MyContent(props) {
                 <div><center>profile</center></div>
             {props.user?
                 <div>
-                    {props.user.aboutMe}
-                    <div><img src={props.user.photos.small} alt="..."/></div>
+                    {props.user.aboutMe?props.user.aboutMe: ' '}
+                    <div><img src={props.user.photos.small?props.user.photos.small:''} alt="..." style={{width:"20%"}}/></div>
                 </div>:""}
             <br/><br/><br/>
             <div>

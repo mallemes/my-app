@@ -27,7 +27,8 @@ const dialogsReducer = (state = defSate, action) => {
     }else if (action.type === SET_USER_DATA){
         return {
             ...state,
-            user: action.data,
+            user: {...action.data},
+
 
 
         }

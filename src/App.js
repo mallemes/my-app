@@ -7,13 +7,15 @@ import MyContentComp from "./components/Content/MyContentComp";
 import DiologsComponent from "./components/Diologs/DialogsComponent";
 
 import UsersContainer from "./components/Users/UsersContainer";
+import HeaderComp from "./components/Header/HeaderComp";
+
 
 const App = (props) => {
-    // debugger;
+
     return (
         // <BrowserRouter>
         <div className="App">
-            <Header/>
+            <HeaderComp/>
             <MyNav/>
             <div className="App-wr-content">
                 <Routes>
