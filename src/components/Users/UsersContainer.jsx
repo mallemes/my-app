@@ -1,26 +1,25 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {myFollowCreate, setCurPageAC, setLoadAC, setUsersCreate, unFollowCreate} from "../../redux/UsersReducer";
-import axios from "axios";
 import Users from "./Users";
+import {api} from "../../Api/Api";
 
 class UsersCl extends React.Component {
     componentDidMount() {
         this.props.setLoadVal(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.totalCount}`,
-            {withCredentials:true})
-            .then(response => {
-                this.props.setUsers(response.data.items);
+        api.getUsers(this.props.currentPage,this.props.totalCount)
+            .then(data => {
+            this.props.setUsers(data.items)
                 this.props.setLoadVal(false);
-            });
-    }
+                });
+        }
+
     onChangePage =(pageId)=>{
         this.props.setCurPage(pageId)
         this.props.setLoadVal(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageId}&count=${this.props.totalCount}`,
-            {withCredentials:true})
-            .then(response => {
-                this.props.setUsers(response.data.items);
+        api.getUsers(pageId, this.props.totalCount)
+            .then(data => {
+                this.props.setUsers(data.items);
                 this.props.setLoadVal(false);})
             .catch((error) =>console.error(error));
     }

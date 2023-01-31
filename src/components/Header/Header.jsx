@@ -7,7 +7,7 @@ const Header = (props) => {
         <header className={style.Plox}>
             <img  src={myImg} alt=""/>
             {props.isAuth?
-               "":
+               props.login:
                 <NavLink to={'/login'}>login</NavLink>
             }
         </header>

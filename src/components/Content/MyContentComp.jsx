@@ -1,50 +1,46 @@
 import React from "react";
 import MyContent from "./MyContent";
 import {connect} from "react-redux";
-import axios from "axios";
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {userDataAC} from "../../redux/DialogsReducer";
-class MyContentComp1 extends React.Component{
+import {api} from "../../Api/Api";
+
+class MyContentComp1 extends React.Component {
 
     componentDidMount() {
-        let a =  this.props.router.params.number;
+        let a = this.props.router.params.number;
         if (!a) {
             a = 2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${a}`,{withCredentials:true})
-            .then(response => {
-                this.props.userData(response.data);
-            });
-
+        api.userProfile(a).then(data => this.props.userData(data))
     }
-    render() {
 
+    render() {
         return <MyContent {...this.props}/>
     }
 }
-const mapStateToProps = (state)=>
-{
 
-     return{
-        newText:state.profilePage.newText,
-         posts :state.profilePage.posts,
-         user: state.profilePage.user,
+const mapStateToProps = (state) => {
+
+    return {
+        newText: state.profilePage.newText,
+        posts: state.profilePage.posts,
+        user: state.profilePage.user,
 
 
     }
 }
-const mapDispatchToProps = (dispatch)=>
-{
-    return{
-        changeValue : (text)=>{
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeValue: (text) => {
             const newText = {type: "NEW-POST-VALUE", newText: text}
             return dispatch(newText)
         },
-        addPot : ()=>{
+        addPot: () => {
             const a = {type: "ADD-POST"}
             return dispatch(a);
         },
-        userData: (data)=>{
+        userData: (data) => {
             userDataAC(data);
             return dispatch(userDataAC(data));
         }
@@ -60,7 +56,7 @@ function withRouter(Component) {
         return (
             <Component
                 {...props}
-                router={{ location, navigate, params }}
+                router={{location, navigate, params}}
             />
         );
     }
@@ -68,6 +64,6 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-const MyContentComp = connect(mapStateToProps,mapDispatchToProps)(withRouter(MyContentComp1));
+const MyContentComp = connect(mapStateToProps, mapDispatchToProps)(withRouter(MyContentComp1));
 
 export default MyContentComp;
