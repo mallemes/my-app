@@ -4,7 +4,7 @@ import defUser from "../../assets/images/defUser.png"
 import {NavLink} from "react-router-dom";
 import {api} from "../../Api/Api";
 
-const User = ({user, unFollowUser, followUser}) => {
+const User = ({user, unFollowUser, followUser,toggleFollowingPRG,followingInPg}) => {
     return (
         <>
             <div className={styles.main}>
@@ -17,17 +17,23 @@ const User = ({user, unFollowUser, followUser}) => {
                         </div>
                         <div>
                              {user.followed ?
-                                 <button onClick={
+                                 <button disabled={followingInPg.some(id => id === user.id)} onClick={
                                      () => {
+                                         toggleFollowingPRG(true, user.id)
                                          api.unFollow(user.id).then(data => {
+                                             toggleFollowingPRG(false, user.id)
                                              if (data.resultCode === 0) {
                                                  return unFollowUser(user.id)
+
                                              }
+
                                          })
                                      }}>unfollow</button>
-                                 : <button onClick={
+                                 : <button disabled={followingInPg.some(id => id === user.id)} onClick={
                                      () => {
+                                         toggleFollowingPRG(true, user.id)
                                          api.follow(user.id).then(data => {
+                                             toggleFollowingPRG(false, user.id)
                                              if (data.resultCode === 0) {
                                                  return followUser(user.id)
                                              }

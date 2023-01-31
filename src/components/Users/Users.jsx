@@ -8,7 +8,7 @@ import axios from "axios";
 const Users = (props) => {
     // debugger
     let users = props.users.map((user) =><User
-        key={user.id} user={user} followUser={props.followUser} unFollowUser={props.unFollowUser}/>
+        key={user.id} user={user} followUser={props.followUser} unFollowUser={props.unFollowUser} followingInPg={props.followingInPg} toggleFollowingPRG={props.toggleFollowingPRG}/>
     )
     return (
         <div>

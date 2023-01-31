@@ -1,6 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {myFollowCreate, setCurPageAC, setLoadAC, setUsersCreate, unFollowCreate} from "../../redux/UsersReducer";
+import {
+    myFollowCreate,
+    setCurPageAC,
+    setLoadAC,
+    setUsersCreate,
+    toggleFollowingPRG,
+    unFollowCreate
+} from "../../redux/UsersReducer";
 import Users from "./Users";
 import {api} from "../../Api/Api";
 
@@ -34,11 +41,9 @@ class UsersCl extends React.Component {
 
         const followUser = (userId) => this.props.myFollow(userId)
         const unFollowUser = (userId) => this.props.unFollow(userId)
-        return (<Users pages={pages} users={this.props.users}
+        return (<Users pages={pages}
                        followUser={followUser} unFollowUser={unFollowUser}
-                       currentPage={this.props.currentPage}
-                       onChangePage={this.onChangePage}
-                       loadingValue={this.props.loadingValue}/>
+                       onChangePage={this.onChangePage} {...this.props}/>
         );
     }
 }
@@ -50,6 +55,7 @@ const mapStateToProps = (state)=>
         totalCount: state.usersPage.totalCount,
         currentPage:state.usersPage.currentPage,
         loadingValue:state.usersPage.loading,
+        followingInPg:state.usersPage.followingInProgress,
     }
 }
 const mapDispatchToProps = (dispatch)=>
@@ -69,7 +75,8 @@ const mapDispatchToProps = (dispatch)=>
         },
         setLoadVal :(loading)=>{
             return dispatch(setLoadAC(loading))
-        }
+        },
+        toggleFollowingPRG :(isFetching,userId)=> dispatch(toggleFollowingPRG(isFetching,userId)),
     }
 }
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersCl);
