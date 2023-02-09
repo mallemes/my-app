@@ -2,9 +2,7 @@ import React from "react";
 import User from "./User";
 import styles from "./Users.module.css";
 import loading from "../../assets/images/loading.gif";
-import {NavLink} from "react-router-dom";
-import defUser from "../../assets/images/defUser.png";
-import axios from "axios";
+
 const Users = (props) => {
     // debugger
     let users = props.users.map((user) =><User

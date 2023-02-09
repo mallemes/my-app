@@ -1,40 +1,33 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {authUserDataAC} from "../../redux/AuthReducer";
-import axios from "axios";
-import {api} from "../../Api/Api";
+import {auth} from "../../redux/AuthReducer";
 
-class HeaderClass extends React.Component{
+class HeaderClass extends React.Component {
     componentDidMount() {
-        api.auth().then(data => {
-                if(data.resultCode ===0) {
-                    let {id, login, email} = data.data;
-                    this.props.authUserData(id, login, email);
-                }
-            });
+        this.props.authUserData();
     }
 
     render() {
-       return(<Header {...this.props}/>);
-   }
+        return (<Header {...this.props}/>);
+    }
 }
 
-const ssd =(state)=> ({
+const ssd = (state) => ({
     userId: state.auth.userId,
     login: state.auth.login,
     email: state.auth.email,
-    isAuth:state.auth.isAuth,
+    isAuth: state.auth.isAuth,
 })
-const  ssf = (dispatch)=>{
-   return{
-       authUserData : (id,login, email)=>{
-           return dispatch(authUserDataAC(id,login, email))
-       },
-   }
+const ssf = (dispatch) => {
+    return {
+        authUserData: () => {
+            return dispatch(auth())
+        },
+    }
 
 }
 
-const HeaderComp = connect(ssd,ssf)(HeaderClass);
+const HeaderComp = connect(ssd, ssf)(HeaderClass);
 
 export default HeaderComp;

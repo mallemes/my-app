@@ -1,3 +1,5 @@
+import {api} from "../Api/Api";
+
 const SET_USER_DATA = "SET_USER_DATA";
 
 const defSate = {  posts: [
@@ -37,3 +39,7 @@ const dialogsReducer = (state = defSate, action) => {
 }
 export const userDataAC = (data)=>({type:SET_USER_DATA,data})
 export default dialogsReducer;
+
+export const userProfile = (a) =>(dispatch)=>{
+    api.userProfile(a).then(data => dispatch(userDataAC(data)))
+}

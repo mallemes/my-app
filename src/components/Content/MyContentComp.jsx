@@ -2,8 +2,7 @@ import React from "react";
 import MyContent from "./MyContent";
 import {connect} from "react-redux";
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
-import {userDataAC} from "../../redux/DialogsReducer";
-import {api} from "../../Api/Api";
+import {userProfile} from "../../redux/DialogsReducer";
 
 class MyContentComp1 extends React.Component {
 
@@ -12,7 +11,7 @@ class MyContentComp1 extends React.Component {
         if (!a) {
             a = 2;
         }
-        api.userProfile(a).then(data => this.props.userData(data))
+        this.props.userProfile(a)
     }
 
     render() {
@@ -40,9 +39,8 @@ const mapDispatchToProps = (dispatch) => {
             const a = {type: "ADD-POST"}
             return dispatch(a);
         },
-        userData: (data) => {
-            userDataAC(data);
-            return dispatch(userDataAC(data));
+        userProfile:(a)=>{
+            return dispatch(userProfile(a))
         }
     }
 }
