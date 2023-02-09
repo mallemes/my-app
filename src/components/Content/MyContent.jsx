@@ -1,6 +1,7 @@
 import style from './StyleContent.module.css';
 import Posts from "../Post/Posts";
 import React from "react";
+import {Navigate} from "react-router-dom";
 
 function MyContent(props) {
 
@@ -11,6 +12,7 @@ function MyContent(props) {
         props.changeValue(e.target.value)
     }
 // debugger
+    if(!props.isAuth){return <Navigate to={'/login'}/>}
     return (
         <div /*className={style.myContent}*/>
             <div className={style.mainTitle}>

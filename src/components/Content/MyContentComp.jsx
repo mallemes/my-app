@@ -12,6 +12,7 @@ class MyContentComp1 extends React.Component {
             a = 2;
         }
         this.props.userProfile(a)
+
     }
 
     render() {
@@ -25,6 +26,7 @@ const mapStateToProps = (state) => {
         newText: state.profilePage.newText,
         posts: state.profilePage.posts,
         user: state.profilePage.user,
+        isAuth: state.auth.isAuth
 
 
     }

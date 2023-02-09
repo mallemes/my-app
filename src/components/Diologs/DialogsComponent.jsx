@@ -6,7 +6,17 @@ import Diologs from "./Diologs";
 import {connect} from "react-redux";
 
 
+class DialogComp extends React.Component{
 
+    componentDidMount() {
+
+    }
+
+    render() {
+
+        return<Diologs {...this.props}/>
+    }
+}
 const mapStateToProps = (state)=>
 {
     const newList = state.dialogsPage.messagesDate.map(el => <Message key={el.message} message={el.message} id={el.id}/>);
@@ -14,11 +24,11 @@ const mapStateToProps = (state)=>
     return{
         newMessBody: state.dialogsPage.newMessageBody,
         newList: newList,
-        newDialogDate:newDialogDate
+        newDialogDate:newDialogDate,
+        isAuth:state.auth.isAuth,
     }
 }
-const mapDispatchToProps = (dispatch)=>
-{
+const mapDispatchToProps = (dispatch)=> {
     return{
         changeValue: (event) =>{
             let newMessage = updNewMessageBodyCreator(event)
@@ -30,5 +40,5 @@ const mapDispatchToProps = (dispatch)=>
         },
     }
 }
-const DiologsComponent = connect(mapStateToProps,mapDispatchToProps)(Diologs);
+const DiologsComponent = connect(mapStateToProps,mapDispatchToProps)(DialogComp);
 export default DiologsComponent;

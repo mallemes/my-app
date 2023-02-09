@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './Diologs.module.css';
+import { Navigate } from 'react-router-dom';
 const Diologs = (props) => {
      const onSendMessage = () => {
        props.onSendMessage();
@@ -8,7 +9,9 @@ const Diologs = (props) => {
          let a = event.target.value;
         props.changeValue(a);
     }
+    if(!props.isAuth){return <Navigate to={'/login'}/>}
     return (
+
         <div className={style.main}>
             <div className={style.dialogs}>
                 {props.newDialogDate}

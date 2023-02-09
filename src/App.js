@@ -8,6 +8,7 @@ import DiologsComponent from "./components/Diologs/DialogsComponent";
 
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderComp from "./components/Header/HeaderComp";
+import Login from "./components/Login/Login";
 
 
 const App = (props) => {
@@ -24,6 +25,7 @@ const App = (props) => {
                     <Route path='/profile/:number' element={<MyContentComp/>}/>
                     <Route path='/dialogs/:number' element={<DiologsComponent/>}/>
                     <Route path='/users' element={<UsersContainer/>}/>
+                    <Route path='/login' element={<Login/>}/>
                 </Routes>
             </div>
         </div>
