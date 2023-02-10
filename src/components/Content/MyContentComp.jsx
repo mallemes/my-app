@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {userProfile} from "../../redux/DialogsReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class MyContentComp1 extends React.Component {
     componentDidMount() {
@@ -49,7 +50,5 @@ function withRouter(Component) {
 
     return ComponentWithRouterProp;
 }
-
-const MyContentComp = connect(mapStateToProps, mapDispatchToProps)(withRouter(withAuthRedirect(MyContentComp1)));
-
-export default MyContentComp;
+// const MyContentComp = connect(mapStateToProps, mapDispatchToProps)(withRouter(withAuthRedirect(MyContentComp1)));
+export default compose(connect(mapStateToProps, mapDispatchToProps),withRouter,withAuthRedirect)(MyContentComp1);

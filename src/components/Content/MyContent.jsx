@@ -1,6 +1,7 @@
 import style from './StyleContent.module.css';
 import Posts from "../Post/Posts";
 import React from "react";
+import ProfileStatus from "./ProfileStatus";
 
 function MyContent(props) {
 
@@ -34,6 +35,7 @@ function MyContent(props) {
                     <button onClick={addPot}>add</button>
                 </div>
             </div>
+            <ProfileStatus status={"qwertyui"}/>
            <Posts posts={props.posts}/>
         </div>
     );

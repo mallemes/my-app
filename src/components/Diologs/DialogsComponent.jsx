@@ -5,6 +5,7 @@ import {sendMessageCreator, updNewMessageBodyCreator} from "../../redux/state";
 import Diologs from "./Diologs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 class DialogComp extends React.Component{
@@ -26,5 +27,5 @@ const mapDispatchToProps = (dispatch)=> {
     }
 }
 
-const DiologsComponent = withAuthRedirect(connect(mapStateToProps,mapDispatchToProps)(DialogComp));
-export default DiologsComponent;
+// const DiologsComponent = withAuthRedirect(connect(mapStateToProps,mapDispatchToProps)(DialogComp));
+export default compose(connect(mapStateToProps,mapDispatchToProps),withAuthRedirect)(DialogComp);
