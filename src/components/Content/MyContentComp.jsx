@@ -3,50 +3,36 @@ import MyContent from "./MyContent";
 import {connect} from "react-redux";
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {userProfile} from "../../redux/DialogsReducer";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class MyContentComp1 extends React.Component {
-
     componentDidMount() {
         let a = this.props.router.params.number;
-        if (!a) {
-            a = 2;
-        }
+        if (!a) {a = 2;}
         this.props.userProfile(a)
-
     }
-
     render() {
         return <MyContent {...this.props}/>
     }
 }
 
 const mapStateToProps = (state) => {
-
     return {
         newText: state.profilePage.newText,
         posts: state.profilePage.posts,
         user: state.profilePage.user,
-        isAuth: state.auth.isAuth
-
-
     }
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
         changeValue: (text) => {
-            const newText = {type: "NEW-POST-VALUE", newText: text}
-            return dispatch(newText)
-        },
+            return dispatch({type: "NEW-POST-VALUE", newText: text})},
         addPot: () => {
-            const a = {type: "ADD-POST"}
-            return dispatch(a);
-        },
-        userProfile:(a)=>{
-            return dispatch(userProfile(a))
-        }
+            return dispatch({type: "ADD-POST"});},
+        userProfile:(a)=>{return dispatch(userProfile(a))}
     }
 }
-
 
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -64,6 +50,6 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-const MyContentComp = connect(mapStateToProps, mapDispatchToProps)(withRouter(MyContentComp1));
+const MyContentComp = connect(mapStateToProps, mapDispatchToProps)(withRouter(withAuthRedirect(MyContentComp1)));
 
 export default MyContentComp;

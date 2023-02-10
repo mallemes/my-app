@@ -9,7 +9,7 @@ const Diologs = (props) => {
          let a = event.target.value;
         props.changeValue(a);
     }
-    if(!props.isAuth){return <Navigate to={'/login'}/>}
+
     return (
 
         <div className={style.main}>
