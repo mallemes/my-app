@@ -15,5 +15,11 @@ export const api = {
     follow: (userId) =>{
         return instance.post(`follow/${userId}`).then(responce => responce.data)},
     auth: ()=> instance.get('auth/me').then(response =>response.data),
-    userProfile: userId=>instance.get(`profile/${userId}`).then(response =>response.data),
+    userProfile: userId=>profileApi.getProfile(userId),
+}
+export const profileApi = {
+    getProfile : (userId)=> instance.get('profile/'+userId).then(response =>response.data),
+    getProfileStatus : (userId)=> instance.get(`profile/status/${userId}`).then(response =>response),
+    setProfileStatus : (status)=> instance.put('/profile/status',{status: status}),
+
 }

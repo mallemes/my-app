@@ -35,7 +35,7 @@ function MyContent(props) {
                     <button onClick={addPot}>add</button>
                 </div>
             </div>
-            <ProfileStatus status={"qwertyui"}/>
+            <ProfileStatus status={props.userStatus} setUserStatus={props.setUserStatus}/>
            <Posts posts={props.posts}/>
         </div>
     );

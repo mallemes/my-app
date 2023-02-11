@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './Diologs.module.css';
-import { Navigate } from 'react-router-dom';
 const Diologs = (props) => {
      const onSendMessage = () => {
        props.onSendMessage();
