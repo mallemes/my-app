@@ -7,7 +7,8 @@ export const withAuthRedirect = (Component) => {
     class WithAuthComponent extends React.Component {
         render() {
             if (!this.props.isAuth) {
-                return <Navigate to={'/login'}/>
+                setTimeout(()=><Navigate to={'/login'}/> ,1000)
+                // return <Navigate to={'/login'}/>
             }
             return <Component {...this.props}/>
         }
