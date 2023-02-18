@@ -3,7 +3,11 @@ import Posts from "../Post/Posts";
 import React from "react";
 import ProfileStatus from "./ProfileStatus";
 import {Field, reduxForm} from "redux-form";
+import {required} from "../../utils/validators/validator";
+import {maxLengthCR} from "../../utils/validators/validator";
+import {MyTextarea} from "../Myhtml/MyFields";
 
+const max = maxLengthCR(30)
 function MyContent(props) {
 
     const addPost = (values) => {
@@ -40,7 +44,7 @@ function MyContent(props) {
 const AddPostForm = (props) => {
   return( <form action="" onSubmit={props.handleSubmit}>
       <div>
-          <Field component={'textarea'} name={'post'} cols="150" rows="4"/>
+          <Field component={MyTextarea} placeholder="insert text" validate={[required, max]} name={'post'} cols="150" rows="4"/>
           <button >add</button>
       </div>
   </form>)
