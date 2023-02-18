@@ -50,7 +50,5 @@ const store = {
     },
 
 }
-export const updNewMessageBodyCreator = (text) => ({type: "NEW-MESSAGE-UPDATE", body: text})
-export const sendMessageCreator = () => ({type: "SEND-MESSAGE"})
 
 export default store;

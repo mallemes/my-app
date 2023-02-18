@@ -2,7 +2,7 @@ import React from "react";
 import MyContent from "./MyContent";
 import {connect} from "react-redux";
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
-import {userProfile, setUserStatus, getStatus} from "../../redux/DialogsReducer";
+import {userProfile, setUserStatus, getStatus, addPostAC} from "../../redux/DialogsReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
@@ -30,10 +30,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeValue: (text) => {
-            return dispatch({type: "NEW-POST-VALUE", newText: text})},
-        addPot: () => {
-            return dispatch({type: "ADD-POST"});},
+          addPot: (post) => {
+            return dispatch(addPostAC(post));},
         userProfile:(a)=>{return dispatch(userProfile(a))},
         setUserStatus:(status)=>{return dispatch(setUserStatus(status))},
         getStatus:(userId)=> dispatch(getStatus(userId))

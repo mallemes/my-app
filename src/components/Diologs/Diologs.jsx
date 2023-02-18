@@ -1,14 +1,12 @@
 import React from 'react';
 import style from './Diologs.module.css';
-const Diologs = (props) => {
-     const onSendMessage = () => {
-       props.onSendMessage();
-    }
-    const changeValue =(event)=>{
-         let a = event.target.value;
-        props.changeValue(a);
-    }
+import {Field, reduxForm} from "redux-form";
 
+const Diologs = (props) => {
+    const onSendMessage = (values) => {
+        console.log(values.message)
+        props.sendMessageCreator(values.message);
+    }
     return (
 
         <div className={style.main}>
@@ -18,14 +16,22 @@ const Diologs = (props) => {
             <div className={style.messages}>
                 <div> {props.newList}</div>
                 <div>
-                    <div><input onChange={changeValue} value={props.newMessBody} type="text"  /></div>
-                    <div>
-                        <button onClick={onSendMessage}>send mess</button>
-                    </div>
+                   <SendMessRF onSubmit={onSendMessage}/>
                 </div>
             </div>
         </div>
     );
 };
+
+const SendMessageForm = (props) => {
+  return ( <form onSubmit={props.handleSubmit} >
+      <div><Field component={'input'}  type="text" name={'message'}/></div>
+      <div>
+          <button >send mess</button>
+      </div>
+  </form>)
+}
+const SendMessRF = reduxForm({form:"sendMessageForm"})(SendMessageForm);
+
 
 export default Diologs;

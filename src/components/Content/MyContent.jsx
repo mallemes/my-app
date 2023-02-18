@@ -2,15 +2,14 @@ import style from './StyleContent.module.css';
 import Posts from "../Post/Posts";
 import React from "react";
 import ProfileStatus from "./ProfileStatus";
+import {Field, reduxForm} from "redux-form";
 
 function MyContent(props) {
 
-    const addPot = () => {
-        props.addPot();
+    const addPost = (values) => {
+        props.addPot(values.post);
     }
-    const changeValue =(e)=>{
-        props.changeValue(e.target.value)
-    }
+
     return (
         <div /*className={style.myContent}*/>
             <div className={style.mainTitle}>
@@ -30,15 +29,22 @@ function MyContent(props) {
             <br/><br/><br/>
             <div>
                 <div><label htmlFor="">Create post:</label></div>
-                <div>
-                    <textarea onChange={changeValue} value={props.newText} cols="150" rows="4"/>
-                    <button onClick={addPot}>add</button>
-                </div>
+              <AddPostReduxForm onSubmit={addPost}/>
             </div>
             <ProfileStatus status={props.userStatus} setUserStatus={props.setUserStatus}/>
            <Posts posts={props.posts}/>
         </div>
     );
 }
+
+const AddPostForm = (props) => {
+  return( <form action="" onSubmit={props.handleSubmit}>
+      <div>
+          <Field component={'textarea'} name={'post'} cols="150" rows="4"/>
+          <button >add</button>
+      </div>
+  </form>)
+}
+const AddPostReduxForm = reduxForm({form:"addPostForm"})(AddPostForm);
 
 export default MyContent;

@@ -13,29 +13,23 @@ const defValue = {
         {id: 4, name: "berik"},
         {id: 5, name: "serik"},
     ],
-    newMessageBody: '',
-    user: null,
+
+
 }
 
 const profileReducer = (state = defValue, action) => {
-    if (action.type === "NEW-MESSAGE-UPDATE") {
-        return {...state,
-        newMessageBody: action.body
-        };
-    } else if (action.type === "SEND-MESSAGE") {
-        // const copyState2 = {...state}
-        let newMessageText = state.newMessageBody;
+    if (action.type === "SEND-MESSAGE") {
+        let newMessageText = action.message;
         const newMessageObj = {id: 14, message: newMessageText};
-        // copyState2.messagesDate = [...state.messagesDate, newMessageObj];
-        // copyState2.newMessageBody = '';
         return {
             ...state,
             messagesDate: [...state.messagesDate, newMessageObj],
-            newMessageBody: ''
         };
 
     }
 
     return state;
 }
+export const sendMessageCreator = (message) => ({type: "SEND-MESSAGE",message})
+
 export default profileReducer;
