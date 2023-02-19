@@ -15,7 +15,8 @@ export const api = {
     follow: (userId) =>{
         return instance.post(`follow/${userId}`).then(responce => responce.data)},
     auth: ()=> instance.get('auth/me').then(response =>response.data),
-    authLogin: (email, password, rememberMe, captcha)=> instance.post('auth/login',{email, password, rememberMe, captcha}).then(response =>response),
+    authLogin: (email, password, rememberMe)=> instance.post('auth/login',{email, password, rememberMe}).then(response =>response),
+    authLogout: ()=> instance.delete('auth/login').then(response =>response),
     authGetCaptcha: ()=> instance.get('security/get-captcha-url').then(response =>response.data),
     userProfile: userId=>profileApi.getProfile(userId),
 }

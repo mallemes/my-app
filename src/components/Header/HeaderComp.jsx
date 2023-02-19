@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {auth} from "../../redux/AuthReducer";
+import {auth, logout} from "../../redux/AuthReducer";
 
 class HeaderClass extends React.Component {
     componentDidMount() {
-        this.props.authUserData();
+        this.props.auth();
     }
 
     render() {
@@ -19,15 +19,8 @@ const ssd = (state) => ({
     email: state.auth.email,
     isAuth: state.auth.isAuth,
 })
-const ssf = (dispatch) => {
-    return {
-        authUserData: () => {
-            return dispatch(auth())
-        },
-    }
 
-}
 
-const HeaderComp = connect(ssd, ssf)(HeaderClass);
+const HeaderComp = connect(ssd,{auth, logout})(HeaderClass);
 
 export default HeaderComp;

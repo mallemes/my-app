@@ -7,7 +7,8 @@ const Header = (props) => {
         <header className={style.Plox}>
             <img  src={myImg} alt=""/>
             {props.isAuth?
-               props.login:
+                <div>{props.login}   <NavLink onClick={()=>props.logout()}>logout   </NavLink> </div>
+                :
                 <NavLink to={'/login'}>login</NavLink>
             }
         </header>

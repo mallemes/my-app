@@ -17,9 +17,7 @@ const authReducer = (state = defSate, action) => {
             login: action.data.login,
             email: action.data.email,
             userId: action.data.userId,
-
-
-            isAuth: true
+            isAuth: action.data.isAuth,
         }
     } else if (action.type === SET_CAPTCHA_URL) {
         return {
@@ -29,7 +27,7 @@ const authReducer = (state = defSate, action) => {
     }
     return state
 }
-export const authUserDataAC = (userId, login, email) => ({type: SET_USER_DATA, data: {userId, login, email}})
+export const authUserDataAC = (userId, login, email, isAuth) => ({type: SET_USER_DATA, data: {userId, login, email, isAuth}})
 const setCaptchaUrl = (captchaUrl) => ({type: SET_CAPTCHA_URL, captchaUrl})
 export default authReducer;
 
@@ -37,8 +35,7 @@ export const auth = () => (dispatch) => {
     api.auth().then(data => {
         if (data.resultCode === 0) {
             let {email, id, login} = data.data;
-            // console.log(data)
-            dispatch(authUserDataAC(id, login, email));
+            dispatch(authUserDataAC(id, login, email, true));
         }
     });
 }
@@ -47,9 +44,16 @@ export const getCaptcha = () => (dispatch) => {
         dispatch(setCaptchaUrl(data.url))
     })
 }
-export const loginned = (email, password, rememberMe, captcha) => () => {
-    api.authLogin(email, password, rememberMe, captcha).then(data => {
-        console.log(data)
-    })
-    // dispatch()
+export const loginned = (email, password, rememberMe) => (dispatch) => {
+    api.authLogin(email, password, rememberMe).then(response => {
+        if (response.data.resultCode === 0) dispatch(auth())
+    });
+}
+export const logout = ()=> dispatch=>{
+    api.authLogout().then(
+        response =>{
+            if (response.data.resultCode === 0)
+            dispatch(authUserDataAC(null, null, null, false))
+        }
+    )
 }
