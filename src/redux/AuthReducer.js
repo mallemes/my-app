@@ -1,4 +1,6 @@
 import {api} from "../Api/Api";
+import {stopSubmit} from "redux-form";
+import message from "../components/Messages/Message";
 
 const SET_USER_DATA = "SET_USER_DAT";
 const SET_CAPTCHA_URL = "SET_CAPTCHA_URL";
@@ -44,9 +46,13 @@ export const getCaptcha = () => (dispatch) => {
         dispatch(setCaptchaUrl(data.url))
     })
 }
-export const loginned = (email, password, rememberMe) => (dispatch) => {
+export const logined = (email, password, rememberMe) => (dispatch) => {
     api.authLogin(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) dispatch(auth())
+        else {
+            let message = "error" && response.data.messages[0]
+            dispatch(stopSubmit('login', {_error: message}))
+        }
     });
 }
 export const logout = ()=> dispatch=>{

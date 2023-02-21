@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './Diologs.module.css';
 import {Field, reduxForm} from "redux-form";
+import Message from "../Messages/Message";
+import DialogItem from "../DialoItem/DiologItem";
 
 const Diologs = (props) => {
     const onSendMessage = (values) => {

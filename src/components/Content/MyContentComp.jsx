@@ -1,7 +1,7 @@
 import React from "react";
 import MyContent from "./MyContent";
 import {connect} from "react-redux";
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {Navigate, useLocation, useNavigate, useParams} from 'react-router-dom';
 import {userProfile, setUserStatus, getStatus, addPostAC} from "../../redux/DialogsReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -9,7 +9,9 @@ import {compose} from "redux";
 class MyContentComp1 extends React.Component {
     componentDidMount() {
         let userId = this.props.router.params.number;
-        if (!userId) {userId = 27705;}
+        if (!userId) {userId = this.props.authUserId;}
+        if(!userId) userId = 27705
+        console.log(this.props.authUserId)
         this.props.getStatus(userId)
         this.props.userProfile(userId)
 
@@ -24,6 +26,7 @@ const mapStateToProps = (state) => {
         newText: state.profilePage.newText,
         posts: state.profilePage.posts,
         user: state.profilePage.user,
+        authUserId:state.auth.userId,
         userStatus: state.profilePage.userStatus,
     }
 }

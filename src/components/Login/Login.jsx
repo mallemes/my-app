@@ -1,7 +1,7 @@
 import React from 'react'
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {getCaptcha, loginned} from "../../redux/AuthReducer";
+import {getCaptcha, logined} from "../../redux/AuthReducer";
 import {MyInput} from "../Myhtml/MyFields";
 import {required, maxLengthCR} from "../../utils/validators/validator";
 import {Navigate} from "react-router-dom";
@@ -13,6 +13,7 @@ const LoginForm = (props) => {
             <Field name="email" component={MyInput} validate={[required, max]} type="text"/>
             <Field name="password" component={MyInput} validate={[required, max]} type="text"/>
             <Field name="rememberMe" component="input" type="checkbox"/>
+            {props.error? <div style={{color:"red"}}>{props.error}</div>: ""}
             {/*<img src={props.url} alt="" style={{width:"20%"}}/>*/}
             {/*<Field name="captcha" component={MyInput} validate={[required, max]} type="text"/>*/}
             <button>save</button>
@@ -31,7 +32,7 @@ const ContactForm = reduxForm({form: 'login'})(LoginForm)
 const  Login= (props) =>  {
    const onSubmit = (formData) => {
         let{email, password, rememberMe}= formData;
-        props.loginned(email, password, rememberMe)
+        props.logined(email, password, rememberMe)
     }
     if (props.isAuth) return <Navigate to={'/profile'}/>
     return (
@@ -44,6 +45,6 @@ const  Login= (props) =>  {
         );
 
 }
-export default  connect(propsToState,{getCaptcha, loginned})(Login)
+export default  connect(propsToState,{getCaptcha, logined})(Login)
 
 
