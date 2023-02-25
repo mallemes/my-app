@@ -1,5 +1,5 @@
 import './App.css';
-import Header from "./components/Header/Header";
+
 import MyNav from "./components/MyNav/MyNav";
 
 import {Route, Routes} from "react-router-dom";
@@ -11,17 +11,21 @@ import HeaderComp from "./components/Header/HeaderComp";
 import Login from "./components/Login/Login";
 import {auth} from "./redux/AuthReducer";
 import {connect} from "react-redux";
+import {compose} from "redux";
+import {withRouter} from "./hoc/withAuthRedirect";
+import {setInitialized} from "./redux/AppReducer";
+import loading from "./assets/images/loading.gif";
 
 
 class App extends React.Component{
     componentDidMount() {
-        this.props.auth()
+        this.props.setInitialized()
     }
-
-
     render() {
+        if (!this.props.initialized){
+            return <div><img src={loading} alt="..." style={{height:"200px"}}/></div>
+        }
         return (
-
             <div className="App">
                 <HeaderComp/>
                 <MyNav/>
@@ -41,5 +45,9 @@ class App extends React.Component{
     }
 }
 
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+})
 
-export default connect(null, {auth})(App);
+// export default connect(null, {setInitialized})(withRouter(App));
+export default compose(withRouter, connect(mapStateToProps,{setInitialized}))(App)

@@ -34,7 +34,7 @@ const setCaptchaUrl = (captchaUrl) => ({type: SET_CAPTCHA_URL, captchaUrl})
 export default authReducer;
 
 export const auth = () => (dispatch) => {
-    api.auth().then(data => {
+    return api.auth().then(data => {
         if (data.resultCode === 0) {
             let {email, id, login} = data.data;
             dispatch(authUserDataAC(id, login, email, true));
