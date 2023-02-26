@@ -2,6 +2,14 @@ import React from 'react';
 import {connect} from "react-redux";
 import {getUsers, myFollow, unFollow} from "../../redux/UsersReducer";
 import Users from "./Users";
+import {
+    getCurrentPageSL,
+    getFollowingInProgressSL,
+    getLoadingSL,
+    getPageSizeSL,
+    getTotalCountSL,
+    getUsersSL
+} from "../../redux/Selectors";
 
 class UsersCl extends React.Component {
     componentDidMount() {
@@ -30,12 +38,12 @@ class UsersCl extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        loadingValue: state.usersPage.loading,
-        followingInPg: state.usersPage.followingInProgress,
+        users: getUsersSL(state),
+        pageSize: getPageSizeSL(state),
+        totalCount: getTotalCountSL(state),
+        currentPage: getCurrentPageSL(state),
+        loadingValue: getLoadingSL(state),
+        followingInPg: getFollowingInProgressSL(state),
     }
 }
 const mapDispatchToProps = (dispatch) => {

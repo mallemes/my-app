@@ -6,17 +6,18 @@ import DialogItem from "../DialoItem/DiologItem";
 
 const Diologs = (props) => {
     const onSendMessage = (values) => {
-        console.log(values.message)
         props.sendMessageCreator(values.message);
     }
     return (
-
         <div className={style.main}>
             <div className={style.dialogs}>
-                {props.newDialogDate}
+                {props.dialogs.map(names => <DialogItem key={names.name} name={names.name} id={names.id}/>)}
+
             </div>
             <div className={style.messages}>
-                <div> {props.newList}</div>
+                <div>
+                    {props.messagesData.map(el => <Message key={el.message} message={el.message} id={el.id}/>)}
+                </div>
                 <div>
                    <SendMessRF onSubmit={onSendMessage}/>
                 </div>

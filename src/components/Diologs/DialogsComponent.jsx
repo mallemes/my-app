@@ -11,14 +11,10 @@ import {sendMessageCreator} from "../../redux/ProfileReducer";
 class DialogComp extends React.Component{
     render() {return<Diologs {...this.props}/>}
 }
-const mapStateToProps = (state)=> {
-    const newList = state.dialogsPage.messagesDate.map(el => <Message key={el.message} message={el.message} id={el.id}/>);
-    const newDialogDate = state.dialogsPage.dialogs.map(names => <DialogItem key={names.name} name={names.name} id={names.id}/>);
-    return{
-        newList: newList,
-        newDialogDate:newDialogDate,
-    }
-}
+const mapStateToProps = (state)=> ({
+        messagesData: state.dialogsPage.messagesDate,
+        dialogs: state.dialogsPage.dialogs,
+})
 
 // const DiologsComponent = withAuthRedirect(connect(mapStateToProps,mapDispatchToProps)(DialogComp));
 export default compose(connect(mapStateToProps,{sendMessageCreator}),withAuthRedirect)(DialogComp);
