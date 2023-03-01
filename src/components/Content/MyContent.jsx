@@ -33,7 +33,7 @@ function MyContent(props) {
             <br/><br/><br/>
             <div>
                 <div><label htmlFor="">Create post:</label></div>
-              <AddPostReduxForm onSubmit={addPost}/>
+              <AddPostReduxForm onSubmit={addPost} />
             </div>
             <ProfileStatus status={props.userStatus} setUserStatus={props.setUserStatus}/>
            <Posts posts={props.posts}/>
@@ -44,8 +44,13 @@ function MyContent(props) {
 const AddPostForm = (props) => {
   return( <form action="" onSubmit={props.handleSubmit}>
       <div>
-          <Field component={MyTextarea} placeholder="insert text" validate={[required, max]} name={'post'} cols="150" rows="4"/>
-          <button >add</button>
+          <Field component={MyTextarea} placeholder="insert text" validate={[required, max]} name={'post'} cols="150" rows="4"/>{' '}
+          <button type="submit"  disabled={props.pristine || props.submitting}>
+              Submit
+          </button>
+          <button type="button" style={{backgroundColor:"red"}}  disabled={props.pristine || props.submitting} onClick={props.reset}>
+              Clear
+          </button>
       </div>
   </form>)
 }

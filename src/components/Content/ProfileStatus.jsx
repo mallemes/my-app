@@ -11,22 +11,26 @@ const ProfileStatus = (props) => {
     },[props.status])
     const changeValue = (e)=>{
         setStatus(e.target.value)
+
     }
+
     return (
+
         <div>{!editMode &&
             <div>
                 <span onDoubleClick={()=>setEditMode(true)}>{props.status || "no status"}</span>
             </div>
         }{editMode &&
             <div>
-                <input type="text" onChange={changeValue} autoFocus={true} onBlur={deActiveMode} value={status}/>
+                <input type="text" onChange={changeValue} autoFocus={true} onBlur={deActiveMode}  value={status}/>
             </div>
         }
+
         </div>
     );
 };
 
-export default ProfileStatus;
+export default React.memo(ProfileStatus);
 
 // class ProfileStatus extends React.Component {
 //     state = {

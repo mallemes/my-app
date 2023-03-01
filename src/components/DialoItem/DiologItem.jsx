@@ -10,4 +10,4 @@ const DialogItem = (props) => {
     );
 }
 
-export default DialogItem;
+export default React.memo(DialogItem);
