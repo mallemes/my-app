@@ -18,11 +18,6 @@ const defValue = {
 
 const UsersReducer = (state = defValue, action) => {  //action ={type:"...", ...}
     if (action.type === FOLLOW) {
-        // return {
-        //     ...state,
-        // users: state.users.map((el)=>el.id===action.userId ? el.followed=true :el.followed),
-        // }
-        //use
         return {
             ...state,
             users: state.users.map((user) => {
@@ -71,34 +66,29 @@ export const setUsersCreate = (users) => ({type: SET_USERS, users: users});
 export const setCurPageAC = (pageId) => ({type: SET_CUR_PAGE, pageId: pageId});
 export const setLoadAC = (loading) => ({type: SET_LOAD_VALUE, loading});
 export const toggleFollowingPRG = (isFetching, userId) => ({type: TOGGLE_FOLLOWING_PRG, isFetching, userId});
-// export const setCurPageAC = (users) => ({type: SET_CUR_PAGE, users:users});
-export const getUsers = (currentPage, totalCount) => (dispatch) => {
+export const getUsers = (currentPage, totalCount) => {
+    return async(dispatch) => {
     dispatch(setCurPageAC(currentPage))
     dispatch(setLoadAC(true))
-    api.getUsers(currentPage, totalCount)
-        .then(data => {
+    const data = await api.getUsers(currentPage, totalCount)
             dispatch(setUsersCreate(data.items))
             dispatch(setLoadAC(false));
-        });
+    }
 }
-export const unFollow = (userId) => (dispatch) => {
+export const unFollow = (userId) => async (dispatch) => {
     dispatch(toggleFollowingPRG(true, userId))
-    api.unFollow(userId)
-        .then(data => {
+    const data = await api.unFollow(userId);
             dispatch(toggleFollowingPRG(false, userId))
             if (data.resultCode === 0) {
-                dispatch(unFollowCreate(userId))
-            }
-        });
+                dispatch(unFollowCreate(userId))}
 }
-export const myFollow = (userId)=>(dispatch)=>{
+export const myFollow = (userId)=>async (dispatch)=>{
     dispatch(toggleFollowingPRG(true, userId))
-    api.follow(userId).then(data => {
+    const data = await api.follow(userId)
         dispatch(toggleFollowingPRG(false, userId))
         if (data.resultCode === 0) {
             dispatch(myFollowCreate(userId))
         }
-    })
 }
 
 export default UsersReducer;

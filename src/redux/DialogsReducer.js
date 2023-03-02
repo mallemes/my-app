@@ -45,12 +45,13 @@ export default dialogsReducer;
 export const userProfile = (a) =>(dispatch)=>{
     api.userProfile(a).then(data => dispatch(userDataAC(data)))
 }
-export const setUserStatus = (status)=>(dispatch)=>{
-    profileApi.setProfileStatus(status)
-        .then(response =>{
-            if (response.data.resultCode===0){
-            dispatch(userStatusAC(status))}}
-        )}
+export const setUserStatus = (status)=>{
+    return async (dispatch)=>{
+        const  responce = await profileApi.setProfileStatus(status)
+                if (responce.data.resultCode===0){
+                    dispatch(userStatusAC(status))}
+            }
+}
 export const getStatus = (userId)=>(dispatch)=>{
     profileApi.getProfileStatus(userId).then(response => dispatch(userStatusAC(response.data)));
 }

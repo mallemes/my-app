@@ -1,7 +1,5 @@
 import {api} from "../Api/Api";
 import {stopSubmit} from "redux-form";
-import message from "../components/Messages/Message";
-
 const SET_USER_DATA = "SET_USER_DAT";
 const SET_CAPTCHA_URL = "SET_CAPTCHA_URL";
 
@@ -33,13 +31,13 @@ export const authUserDataAC = (userId, login, email, isAuth) => ({type: SET_USER
 const setCaptchaUrl = (captchaUrl) => ({type: SET_CAPTCHA_URL, captchaUrl})
 export default authReducer;
 
-export const auth = () => (dispatch) => {
-    return api.auth().then(data => {
+export const auth = () => async (dispatch) => {
+    const data = await api.auth()
         if (data.resultCode === 0) {
             let {email, id, login} = data.data;
             dispatch(authUserDataAC(id, login, email, true));
         }
-    });
+        return data;
 }
 export const getCaptcha = () => (dispatch) => {
     api.authGetCaptcha().then(data => {
