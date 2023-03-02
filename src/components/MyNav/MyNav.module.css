@@ -1,21 +1,14 @@
-.myNav img {
-    width: 10%;
-}
 
 .myNav {
     grid-area: m;
-    background-color: green;
-    padding: 30px;
+    background-color: #9a9e9f;
+    padding: 50px;
 
 }
-/*.myNav a{*/
-/*    color: aliceblue;*/
-/*}*/
-
 .item{
     color: aliceblue;
 }
 .item .active{
-    color: darkred;
+    color: #ff5d4b;
 
 }

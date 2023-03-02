@@ -3,23 +3,27 @@ import styles from "./Users.module.css";
 import defUser from "../../assets/images/defUser.png"
 import {NavLink} from "react-router-dom";
 
-const User = ({user, unFollowUser, followUser,followingInPg}) => {
+const User = ({user, unFollowUser, followUser, followingInPg}) => {
     return (
         <>
             <div className={styles.main}>
                         <span>
                         <div>
                             <NavLink to={'/profile/' + user.id}>
-                            <img src={user.photos.small === null ? defUser : user.photos.small} alt="dd"
-                                 className={styles.avatar}/>
+                            <img src={user.photos.small === null ? defUser : user.photos.small}
+                                 className={styles.avatar} alt="-"/>
                                 </NavLink>
                         </div>
                         <div>
                              {user.followed ?
                                  <button disabled={followingInPg.some(id => id === user.id)} onClick={
-                                     () => {return unFollowUser(user.id)}}>unfollow</button>
+                                     () => {
+                                         return unFollowUser(user.id)
+                                     }}>unfollow</button>
                                  : <button disabled={followingInPg.some(id => id === user.id)} onClick={
-                                     () => { followUser(user.id)}}>follow</button>
+                                     () => {
+                                         followUser(user.id)
+                                     }}>follow</button>
                              }
                         </div>
                     </span>

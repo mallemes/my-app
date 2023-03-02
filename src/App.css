@@ -6,13 +6,16 @@
     grid-template-areas:
           "h h "
           "m n";
+    background-color: #9a9e9f;
 }
 
 .App-wr-content {
     background-color: cadetblue;
     grid-area: n;
 }
-
+a{
+    text-decoration: none;
+}
 
 
 /*.App-logo {*/

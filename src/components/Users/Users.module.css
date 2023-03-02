@@ -10,7 +10,7 @@
     display: flex;
 
 }
-button{
+.myButton{
     width: 60px;
     align-items: center;
     justify-items: center;
@@ -23,6 +23,11 @@ button{
     margin-block-end: 500px;
 }
 .selectedPg{
-    color: #dc6fff;
-    font-size: xx-large;
+    color: #ff072e;
+    width: 60px;
+    align-items: center;
+    justify-items: center;
+    border-color: #ff0018;
+    border-radius: 10px;
+    background-color: cyan;
 }
