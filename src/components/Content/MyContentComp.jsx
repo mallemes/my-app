@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import MyContent from "./MyContent";
 import {connect} from "react-redux";
 
@@ -26,7 +26,8 @@ class MyContentComp1 extends React.Component {
 
     render() {
         // if (!this.userId){ setTimeout(()=><Navigate to={'/login'}/>, 1000)}
-        return <MyContent {...this.props}/>
+       return (<MyContent {...this.props}/>)
+
     }
 }
 

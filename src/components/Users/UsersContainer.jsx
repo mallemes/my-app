@@ -23,6 +23,7 @@ class UsersCl extends React.Component {
 
 
     render() {
+        {console.log('sss')}
         // let pagesCount = Math.ceil(this.props.totalCount/this.props.pageSize);
         // const pages = [];
         // for (let i=1;i<pagesCount+1;i++){
