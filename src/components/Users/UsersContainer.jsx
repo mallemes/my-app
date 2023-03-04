@@ -13,12 +13,14 @@ import {
 
 class UsersCl extends React.Component {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.totalCount)
+        this.props.getUsers(this.props.currentPage)
+
     }
 
     onChangePage = (pageId) => {
-        return this.props.getUsers(pageId, this.props.totalCount)
+        return this.props.getUsers(pageId)
     }
+
 
     render() {
         // let pagesCount = Math.ceil(this.props.totalCount/this.props.pageSize);
@@ -26,11 +28,10 @@ class UsersCl extends React.Component {
         // for (let i=1;i<pagesCount+1;i++){
         //     pages.push(i)
         // }
-        const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        // // const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         const followUser = (userId) => this.props.myFollow(userId)
         const unFollowUser = (userId) => this.props.unFollow(userId)
-        return (<Users pages={pages}
-                       followUser={followUser} unFollowUser={unFollowUser}
+        return (<Users followUser={followUser} unFollowUser={unFollowUser}
                        onChangePage={this.onChangePage} {...this.props}/>
         );
     }

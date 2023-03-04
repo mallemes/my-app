@@ -1,5 +1,5 @@
 import {api} from "../Api/Api";
-
+const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -9,7 +9,7 @@ const TOGGLE_FOLLOWING_PRG = 'TOGGLE_FOLLOWING_PRG';
 const defValue = {
     users: [],
     pageSize: 10,
-    totalCount: 10,
+    totalCount: 100,
     currentPage: 1,
     loading: false,
     followingInProgress: [],
@@ -57,12 +57,18 @@ const UsersReducer = (state = defValue, action) => {  //action ={type:"...", ...
                 [...state.followingInProgress, action.userId]
                 : state.followingInProgress.filter(id => id !== action.userId)
         }
+    }else if (action.type === SET_USERS_TOTAL_COUNT){
+        return {
+            ...state,
+            totalCount: action.totalCount
+        }
     }
     return state;
 }
 export const myFollowCreate = (userId) => ({type: FOLLOW, userId: userId});
 export const unFollowCreate = (userId) => ({type: UNFOLLOW, userId: userId});
 export const setUsersCreate = (users) => ({type: SET_USERS, users: users});
+const setUsersTotalCount = (totalCount) =>({type:SET_USERS_TOTAL_COUNT, totalCount})
 export const setCurPageAC = (pageId) => ({type: SET_CUR_PAGE, pageId: pageId});
 export const setLoadAC = (loading) => ({type: SET_LOAD_VALUE, loading});
 export const toggleFollowingPRG = (isFetching, userId) => ({type: TOGGLE_FOLLOWING_PRG, isFetching, userId});
@@ -72,6 +78,7 @@ export const getUsers = (currentPage, totalCount) => {
     dispatch(setLoadAC(true))
     const data = await api.getUsers(currentPage, totalCount)
             dispatch(setUsersCreate(data.items))
+            dispatch(setUsersTotalCount(data.totalCount))
             dispatch(setLoadAC(false));
     }
 }

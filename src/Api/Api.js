@@ -7,7 +7,7 @@ const instance = axios.create({
 })
 
 export const api = {
-    getUsers: (pageId, totalCount)=>{
+    getUsers: (pageId, totalCount=10)=>{
         return instance.get(`users?page=${pageId}&count=${totalCount}`).then(response=> response.data)},
 
     unFollow: (userId) =>{
