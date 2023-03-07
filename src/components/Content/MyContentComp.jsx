@@ -1,16 +1,14 @@
-import React, {Suspense} from "react";
+import React from "react";
 import MyContent from "./MyContent";
 import {connect} from "react-redux";
 
-import {userProfile, setUserStatus, getStatus, addPostAC} from "../../redux/DialogsReducer";
-import {withAuthRedirect, withRouter} from "../../hoc/withAuthRedirect";
+import {userProfile, setUserStatus, getStatus, addPostAC, setProfileImage} from "../../redux/DialogsReducer";
+import {withRouter} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {Navigate} from "react-router-dom";
 
 
 class MyContentComp1 extends React.Component {
-    // userId = null;
-    componentDidMount() {
+    refrech = () => {
         let userId = this.props.router.params.number;
         if (!userId) {
             userId = this.props.authUserId;
@@ -18,15 +16,23 @@ class MyContentComp1 extends React.Component {
             //     this.props.history.push("/login")
             // }
         }
-        this.userId = userId;
         this.props.getStatus(userId)
         this.props.userProfile(userId)
+    }
 
+    componentDidMount() {
+        this.refrech()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.router.params.number !== prevProps.router.params.number) {
+            this.refrech()
+        }
     }
 
     render() {
         // if (!this.userId){ setTimeout(()=><Navigate to={'/login'}/>, 1000)}
-       return (<MyContent {...this.props}/>)
+        return (<MyContent {...this.props} isOwner={!this.props.router.params.number}/>)
 
     }
 }
@@ -38,6 +44,7 @@ const mapStateToProps = (state) => {
         user: state.profilePage.user,
         authUserId: state.auth.userId,
         userStatus: state.profilePage.userStatus,
+
     }
 }
 
@@ -52,7 +59,8 @@ const mapDispatchToProps = (dispatch) => {
         setUserStatus: (status) => {
             return dispatch(setUserStatus(status))
         },
-        getStatus: (userId) => dispatch(getStatus(userId))
+        getStatus: (userId) => dispatch(getStatus(userId)),
+        setProfileImage: (photoFile) => dispatch(setProfileImage(photoFile))
     }
 }
 
