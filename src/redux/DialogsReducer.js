@@ -1,4 +1,5 @@
 import {api, profileApi} from "../Api/Api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_USER_STATUS = "SET_USER_STATUS";
@@ -71,4 +72,16 @@ export const setProfileImage = (photoFile) => {
             return dispatch(setUserAvatarAC(response.data.data.photos))
         }
     }
+}
+export const editProfileTK = (profile)=> async (dispatch, getState)=>{
+
+        const response  = await profileApi.editProfile(profile)
+        if (response.data.resultCode === 0){
+            const userId = getState().auth.userId
+            return dispatch(userProfile(userId))
+        }else {
+            dispatch(stopSubmit('editProfile', {_error:response.data.messages[0]}))
+            return Promise.reject(response.data.messages[0]);
+        }
+
 }

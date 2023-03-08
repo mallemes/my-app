@@ -2,9 +2,17 @@ import React from "react";
 import MyContent from "./MyContent";
 import {connect} from "react-redux";
 
-import {userProfile, setUserStatus, getStatus, addPostAC, setProfileImage} from "../../redux/DialogsReducer";
+import {
+    userProfile,
+    setUserStatus,
+    getStatus,
+    addPostAC,
+    setProfileImage,
+    editProfileTK
+} from "../../redux/DialogsReducer";
 import {withRouter} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+
 
 
 class MyContentComp1 extends React.Component {
@@ -60,7 +68,8 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(setUserStatus(status))
         },
         getStatus: (userId) => dispatch(getStatus(userId)),
-        setProfileImage: (photoFile) => dispatch(setProfileImage(photoFile))
+        setProfileImage: (photoFile) => dispatch(setProfileImage(photoFile)),
+        editProfileTK: (profile) => dispatch(editProfileTK(profile)),
     }
 }
 

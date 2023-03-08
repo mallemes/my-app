@@ -7,3 +7,15 @@ img{
 .mainTitle{
     margin-left: 500px;
 }
+.profile{
+    display: grid;
+    grid-template-columns: 30% 30%;
+    padding: 20px;
+    grid-gap: 100px;
+    /*justify-content: space-around;*/
+
+}
+.contact{
+    padding-left: 20px;
+    width: 80%;
+}
