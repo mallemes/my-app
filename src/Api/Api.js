@@ -18,10 +18,12 @@ export const api = {
         return instance.post(`follow/${userId}`).then(responce => responce.data)
     },
     auth: () => instance.get('auth/me').then(response => response.data),
-    authLogin: (email, password, rememberMe) => instance.post('auth/login', {
+    authLogin: (email, password, rememberMe, captcha = null) => instance.post('auth/login', {
         email,
         password,
-        rememberMe
+        rememberMe,
+        captcha,
+
     }).then(response => response),
     authLogout: () => instance.delete('auth/login').then(response => response),
     authGetCaptcha: () => instance.get('security/get-captcha-url').then(response => response.data),

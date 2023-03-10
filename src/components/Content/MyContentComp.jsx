@@ -14,9 +14,8 @@ import {withRouter} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-
 class MyContentComp1 extends React.Component {
-    refrech = () => {
+    refresh = () => {
         let userId = this.props.router.params.number;
         if (!userId) {
             userId = this.props.authUserId;
@@ -29,12 +28,12 @@ class MyContentComp1 extends React.Component {
     }
 
     componentDidMount() {
-        this.refrech()
+        this.refresh()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.router.params.number !== prevProps.router.params.number) {
-            this.refrech()
+            this.refresh()
         }
     }
 

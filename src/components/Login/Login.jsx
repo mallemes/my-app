@@ -8,21 +8,22 @@ import {Navigate} from "react-router-dom";
 
 const max = maxLengthCR(50);
 const LoginForm = (props) => {
+    console.log(props.captcha)
     return (
         <form action="" onSubmit={props.handleSubmit}>
-            <Field name="email" component={MyInput} validate={[required, max]} type="text"/>
-            <Field name="password" component={MyInput} validate={[required, max]} type="text"/>
-            <Field name="rememberMe" component="input" type="checkbox"/>
+           email:  <Field name="email" component={MyInput} validate={[required, max]} type="text"/>
+            password:  <Field name="password" component={MyInput} validate={[required, max]} type="text"/>
+            remember me: <Field name="rememberMe" component="input" type="checkbox"/>
             {props.error? <div style={{color:"red"}}>{props.error}</div>: ""}
-            {/*<img src={props.url} alt="" style={{width:"20%"}}/>*/}
-            {/*<Field name="captcha" component={MyInput} validate={[required, max]} type="text"/>*/}
+            {props.captcha && <img src={props.captcha} alt="..." style={{width:"20%"}} />}
+            {props.captcha && <Field name="captcha" component={MyInput} validate={[required]} type="text"/>}
             <button>save</button>
         </form>
     );
 }
 const propsToState =(state)=> {
     return{
-        // url: state.auth.captchaUrl,
+        captcha: state.auth.captchaUrl,
         isAuth: state.auth.isAuth
     }
 }
@@ -31,8 +32,8 @@ const propsToState =(state)=> {
 const ContactForm = reduxForm({form: 'login'})(LoginForm)
 const  Login= (props) =>  {
    const onSubmit = (formData) => {
-        let{email, password, rememberMe}= formData;
-        props.logined(email, password, rememberMe)
+        let{email, password, rememberMe, captcha}= formData;
+        props.logined(email, password, rememberMe, captcha)
     }
     if (props.isAuth) return <Navigate to={'/profile'}/>
     return (
@@ -40,7 +41,7 @@ const  Login= (props) =>  {
                 <div>
                     <h1>LOGIN PAGE</h1>
                 </div>
-                <ContactForm onSubmit={onSubmit}/>
+                <ContactForm captcha={props.captcha} onSubmit={onSubmit}/>
             </div>
         );
 

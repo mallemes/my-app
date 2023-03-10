@@ -8,7 +8,7 @@ const defSate = {
     login: null,
     email: null,
     isAuth: false,
-    captchaUrl: "",
+    captchaUrl: null,
 }
 const authReducer = (state = defSate, action) => {
     if (action.type === SET_USER_DATA) {
@@ -44,10 +44,13 @@ export const getCaptcha = () => (dispatch) => {
         dispatch(setCaptchaUrl(data.url))
     })
 }
-export const logined = (email, password, rememberMe) => (dispatch) => {
-    api.authLogin(email, password, rememberMe).then(response => {
+export const logined = (email, password, rememberMe, captcha) => (dispatch) => {
+    api.authLogin(email, password, rememberMe, captcha).then(response => {
         if (response.data.resultCode === 0) dispatch(auth())
         else {
+            if (response.data.resultCode === 10){
+                dispatch(getCaptcha())
+            }
             let message = "error" && response.data.messages[0]
             dispatch(stopSubmit('login', {_error: message}))
         }
