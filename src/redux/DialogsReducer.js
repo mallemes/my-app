@@ -6,14 +6,14 @@ const SET_USER_STATUS = "SET_USER_STATUS";
 const SET_USER_AVATAR = "SET_USER_AVATAR";
 
 const defSate = {
-    posts: [
+    posts : [
         {id: 1, text: "offd vfnvn vkvvp"},
         {id: 2, text: "f dffv eff vfvfdd"},
         {id: 3, text: "12 algaaaaaaaaaaaaaaaaaa"},
         {id: 4, text: "offd vfnvn vkvfdvf vffdvvvp"},
         {id: 5, text: "offd vfnvnr43efgrcvegr  reeegr vkvvp"},
         {id: 6, text: "offbgbbrgfddfd vfnvn vkvvp"},
-    ],
+    ] ,
 
     user: null,
     userStatus: '',

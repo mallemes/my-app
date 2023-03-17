@@ -1,6 +1,4 @@
 import React from 'react';
-import DialogItem from "../DialoItem/DiologItem";
-import Message from "../Messages/Message";
 import Diologs from "./Diologs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";

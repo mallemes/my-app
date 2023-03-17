@@ -9,16 +9,16 @@ const SET_LOAD_VALUE = 'SET_LOAD_VALUE';
 const TOGGLE_FOLLOWING_PRG = 'TOGGLE_FOLLOWING_PRG';
 
 type defValuesType = {
-    users: Array<{ name:string|null;id: any, followed: boolean | null,status:boolean|null, photos:any }>,
-    pageSize: null | number
+    users: Array<{ name:string|null;id: number, followed: boolean | null,status:string|null, photos:any }>,
+    pageSize: number
     totalCount: number,
     currentPage: number,
     loading: boolean,
-    followingInProgress: any,
+    followingInProgress: Array<number|null>,
 }
 const defValue: defValuesType = {
     users: [],
-    pageSize: 10,
+    pageSize: 10 ,
     totalCount: 100,
     currentPage: 1,
     loading: false,
@@ -98,7 +98,7 @@ export const getUsers = (currentPage:number, totalCount:number) => {
         dispatch(setLoadAC(false));
     }
 }
-export const unFollow = (userId:any) => async (dispatch:any) => {
+export const unFollow = (userId:number) => async (dispatch:any) => {
     dispatch(toggleFollowingPRG(true, userId))
     const data = await api.unFollow(userId);
     dispatch(toggleFollowingPRG(false, userId))
